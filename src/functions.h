@@ -42,4 +42,15 @@ void setPixel(JsonObject& req, JsonObject& res, Adafruit_NeoPixel& pix){
   }
 }
 
+void alarmRead(){
+  StaticJsonBuffer<200> jsonBuffer;
+  JsonObject& res = jsonBuffer.createObject();
+  char* function;
+  function = "alarmRead";
+  res["function"] = function;
+  res["alarm"] = digitalRead(2);
+  res["status"] = true;
+  res.printTo(Serial);
+}
+
 #endif

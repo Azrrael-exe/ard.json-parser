@@ -10,7 +10,7 @@ void setup(){
   pixels.begin();
   Serial.begin(115200);
   pinMode(interruptPin, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(interruptPin), sensorRead, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(interruptPin), alarmRead, CHANGE);
 }
 
 void loop(){
@@ -22,18 +22,9 @@ void loop(){
     if(req.success()){
       setAll(req, res, pixels);
       setPixel(req, res, pixels);
-      res.printTo(Serial);
+      String output;
+      res.printTo(output);
+      Serial.println(output);
     }
   }
-}
-
-void alarmRead(){
-  // StaticJsonBuffer<200> jsonBuffer;
-  // JsonObject& res = jsonBuffer.createObject();
-  // String function;
-  // function = 'alarmRead'
-  // res["function"] = function;
-  // res["alarm"] = digitalRead(interruptPin);
-  // res["status"] = true;
-  // res.printTo(Serial);
 }

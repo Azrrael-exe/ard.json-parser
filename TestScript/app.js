@@ -1,6 +1,7 @@
 var SerialPort = require('serialport');
-var port = new SerialPort('COM3',{
-  baudrate : 115200
+var port = new SerialPort('/dev/ttyACM0',{
+  baudrate : 115200,
+  parser: SerialPort.parsers.readline('\n')
 });
 
 var keypress = require('keypress');
