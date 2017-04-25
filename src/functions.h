@@ -5,14 +5,11 @@
 #include <Adafruit_NeoPixel.h>
 #include <ArduinoJson.h>
 
-void debug(JsonObject& req, JsonObject& res){
-  req.printTo(Serial);
-};
-
 void setAll(JsonObject& req, JsonObject& res, Adafruit_NeoPixel& pix){
   char* function;
   function = req["function"];
-  if(function == 'setAll'){
+  if(String(function) == "setAll"){
+    res["function"] = function;
     uint8_t num_pixels = pix.numPixels();
     for(int i=0; i<num_pixels; i++){
       uint8_t red = req["red"];
@@ -28,7 +25,8 @@ void setAll(JsonObject& req, JsonObject& res, Adafruit_NeoPixel& pix){
 void setPixel(JsonObject& req, JsonObject& res, Adafruit_NeoPixel& pix){
   char* function;
   function = req["function"];
-  if(function == "setPixel"){
+  if(String(function) == "setPixel"){
+    res["function"] = function;
     uint16_t index = req["index"];
     if(index <= pix.numPixels()){
       uint8_t red = req["red"];
