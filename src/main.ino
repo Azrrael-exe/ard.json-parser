@@ -17,17 +17,10 @@ void loop(){
     JsonObject& req = jsonBuffer.parseObject(inp);
     JsonObject& res = jsonBuffer.createObject();
     if(req.success()){
-      String function;
-      function = req["function"].asString();
-      if(function == "setAll"){
-        setAll(pixels, req, res);
-      }
-      else if(function == "setPixel"){
-        setPixel(pixels, req, res);
-      }
-      else {
-        ;
-      }
+      debug(req, res);
+      setAll(req, res, pixels);
+      setPixel(req, res, pixels);
+      res.printTo(Serial);
     }
   }
 }
